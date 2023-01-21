@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private float guardMovementAnim = 0.001f;
 
+    private bool attackReady = true;
+    private GameObject FXAttack;
+    private Vector2 offsetFX;
 
     private Rigidbody2D rb;
     private Animator playerAnimator;
@@ -18,13 +21,15 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+
+        FXAttack = GameObject.Find("FXAttack");
+        FXAttack.SetActive(false);
     }
 
     private void OnMovement(InputValue value)
     {
         // Get the movement value
         movement = value.Get<Vector2>();
-        Debug.Log("movement->" + movement);
 
         // Condition to keep last animation
         if (movement.x != 0)
@@ -42,8 +47,24 @@ public class PlayerController : MonoBehaviour
 
     private void OnBasicAttack(InputValue value)
     {
-        Debug.Log("attack: " + value);
-        playerAnimator.SetTrigger("IsAttacking");
+
+
+        // Set active FXAttack gameobject
+        if (attackReady)
+        {
+            playerAnimator.SetTrigger("IsAttacking");
+            Debug.Log("begin?");
+            attackReady = false;
+            FXAttack.SetActive(true);
+            FXAttack.transform.position = gameObject.transform.position + new Vector3(movement.x * 1.5f, -1.0f, 0.0f);
+        }
+    }
+
+    public void FinishAttack()
+    {
+        Debug.Log("Finish?");
+        FXAttack.SetActive(false);
+        attackReady = true;
     }
 
 
