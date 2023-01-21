@@ -6,17 +6,34 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speedPlayer = 5.0f;
+
     private Vector2 movement;
     private Rigidbody2D rb;
+    private Animator playerAnimator;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     private void OnMovement(InputValue value)
     {
+        // Get the movement value
         movement = value.Get<Vector2>();
+
+        // Condition to keep last animation
+        if (movement.x != 0)
+        {
+            // Update paramaters on the player animator for the movement
+            playerAnimator.SetFloat("X", movement.x);
+            playerAnimator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            // Reset to idle
+            playerAnimator.SetBool("IsWalking", false);
+        }
     }
 
     private void FixedUpdate()
