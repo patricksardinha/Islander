@@ -294,7 +294,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 1431126664}
   - component: {fileID: 1431126663}
   m_Layer: 0
-  m_Name: EnemiesSpawner
+  m_Name: EnemiesController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 681279932}
-  listEnemies:
+  listEnemiesPrefabs:
   - {fileID: 3171483926963243647, guid: 579f1ddab810a25418b180b6a13e388b, type: 3}
   - {fileID: 8109552845080039879, guid: d4fa6dbffce76d14e9e8d0125f41a08b, type: 3}
   - {fileID: 564660651871660406, guid: 7e657be82e059cd4fab722425109b320, type: 3}
